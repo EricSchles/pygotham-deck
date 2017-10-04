@@ -1,0 +1,299 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Not hotdog :: Deck</title>
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="lib/css/highlight/github-gist.css">
+  <link rel="stylesheet" href="css/theme/dist/main.css">
+  <script>
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = 'lib/css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class='center'>
+        <h1 class='mb1 h2 tc'>Build your own “not hotdog”<br>deep learning model</h1>
+      </section>
+
+      <section>
+        <h2>Introductions</h2>
+        <div class="clearfix mxn2">
+          <div class='col col-7 px2'>
+            <p>I’m Brendan.</p>
+            <p>I was on the data team at <a href="https://www.etsy.com/">Etsy</a>. I’m currently a software developer at <a href="https://18f.gsa.gov/">18F</a>.</p>
+            <p>I also like my fair share of raunchy TV comedies.</p>
+          </div>
+          <div class='col col-5 px2'>
+            <img src='img/me.png'>
+          </div>
+        </div>
+      </section>
+
+      <!--
+      <section class='h-100' data-background-image="img/sv-clip-1.png">
+        <div class='absolute bottom-0 right-0 h6'>
+          <a class='white underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">photo credit</a>
+        </div>
+      </section>
+      -->
+
+      <section>
+        <img src="img/sv-clip-1.png">
+        <a class='h6 underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">photo credit</a>
+      </section>
+
+      <section>
+        <img src="img/sv-clip-2.png">
+        <a class='h6 underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">photo credit</a>
+      </section>
+
+      <section>
+        <img src="img/sv-clip-3.png">
+        <a class='h6 underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">photo credit</a>
+      </section>
+
+      <section>
+        <img src="img/sv-clip-4.png">
+        <a class='h6 underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">photo credit</a>
+      </section>
+
+      <section class='center'>
+        <h2>Goals & Expectations</h2>
+      </section>
+
+      <section>
+        <h2>Image Classification</h2>
+        <p>Input: image</p>
+        <p>Output: a label (i.e., cat, dog, hotdog) or probabilities across labels</p>
+        <img src="img/image-classify.png">
+      </section>
+
+      <section>
+        <h2>Why it’s tricky for computers</h2>
+        <div class="flex items-center justify-center">
+          <img class='p1 col-6' src="img/bball-players.jpg">
+          <img class='p1 col-6' src="img/peek-pugs.jpg">
+        </div>
+      </section>
+
+      <section>
+        <h2>Supervised learning</h2>
+        <div class='sm-col-10'>
+          <p>We give an algorithm a dataset that includes the right answers <strong>(a training set)</strong> and it learns a function that approximates the data.</p>
+          <p>After that, it can make predictions on new (but similar) data that it’s never seen.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Supervised learning</h2>
+        <div class='col-8'>
+          <img class='col-12' src="img/trainset.jpg">
+          <div class='py2 line-height-1'>📚✨⬇️</div>
+          <img class='col-12' src="img/cnn-in-action.gif">
+        </div>
+      </section>
+
+      <section>
+        <h2 class='sm-col-8'>What’s the right tool for this job?</h2>
+        <p>Convolutional Neural Networks 💥</p>
+        <p>But first, let's quickly go over neural nets.</p>
+      </section>
+
+      <section>
+        <h2>Neural networks primer</h2>
+        <div class='py2 center-align'>
+          <img src='img/neuron.png'>
+        </div>
+        <pre><code class="python" data-trim>
+def unit(input, weights, bias):
+    return activation_function(np.dot(input, weights) + bias)
+        </code></pre>
+      </section>
+
+      <section>
+        <h2>Neural networks primer</h2>
+        <div class='py2 center-align'>
+          <img src='img/output-to-input.png'>
+        </div>
+      </section>
+
+      <section>
+        <h2>Neural networks primer</h2>
+        <div class='py2 center-align'>
+          <img class='sm-col-8' src='img/neural-network.png'>
+        </div>
+      </section>
+
+      <section>
+        <h2>Neural networks primer</h2>
+        <div class='py2 center-align'>
+          <img class='sm-col-10' src='img/backprop-slope.png'>
+        </div>
+      </section>
+
+      <section>
+        <h2>Convolutional neural networks</h2>
+        <p>aka ConvNets aka CNNs</p>
+        <p>A powerful hammer for computer vision nails</p>
+        <p>Very similar to ordinary neural nets but with an architecture better suited to process and scale for image inputs</p>
+      </section>
+
+      <section>
+        <h2 class='sm-col-9'>To a computer, an image is just a bunch of numbers</h2>
+        <div class="flex items-center justify-center md-col-10 mxn2">
+          <img class='p2 col-5 border-box' src="img/8-gif.gif">
+          <img class='p2 col-7 border-box' src="img/rgb-numbers.png">
+        </div>
+      </section>
+
+      <section>
+        <h2>Convolutional neural networks</h2>
+        <p class='mt2'>3 main pieces:</p>
+        <ul class='mb2'>
+          <li class='mb1'><strong>convolutional</strong> layer</li>
+          <li class='mb1'><strong>pooling</strong> layer</li>
+          <li class='mb1'>a final fully-connected softmax layer</li>
+        </ul>
+        <img class='sm-col-10' src='img/cnn-ex.png'>
+      </section>
+
+      <section>
+        <h2>Convolutional layer</h2>
+        <p>A fancy way of saying that we take small filters and slide them over the image spatially. Different filters respond to different features in the image. Some may like edges, others may prefer yellow regions, etc.</p>
+        <img class='sm-col-9' src='img/convlayer.png'>
+      </section>
+
+      <section>
+        <h2>Convolution in action</h2>
+        <div class="flex items-center justify-center mxn2">
+          <img class='p2 col-5 border-box' src="img/conv-animate.gif">
+          <img class='p2 col-7 border-box' src="img/conv-animate2.gif">
+        </div>
+      </section>
+
+      <section>
+        <h2>Learned convolution features</h2>
+        <img class='col-12' src='img/cnn-features.jpeg'>
+      </section>
+
+      <section>
+        <h2>Pooling layer</h2>
+        <img class='mt3 sm-col-9' src='img/pool.png'>
+      </section>
+
+      <section>
+        <h2>ConvNet, all together</h2>
+        <img class='mt3 col-12' src='img/cnn-ex.png'>
+      </section>
+
+      <section>
+        <h2>Keras</h2>
+        <p>aka ConvNets aka CNNs</p>
+        <p>A powerful hammer for computer vision nails</p>
+        <p>Very similar to ordinary neural nets but with an architecture better suited to process and scale for image inputs</p>
+      </section>
+
+      <section class='center'>
+        <h2 class='m0 h1 tc'>Benefits</h2>
+      </section>
+
+      <section>
+        <h2>Naming things is hard</h2>
+        <p>(and now unnecessary!)</p>
+        <p>Atomic calls ’em like it sees ’em</p>
+        <div class='mt4'>
+          <div><code class='blue'>.bg-red</code> = <span class='bold'>b</span>ack<span class='bold'>g</span>round <span class='bold'>red</span></div>
+          <div><code class='blue'>.m2</code> = <span class='bold'>m</span>argin of <span class='bold'>2</span> spacing units</div>
+          <div><code class='blue'>.bold</code> = any guesses? 😏</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Straightforward</h2>
+        <p><strong>Obvious.</strong> Simple, obvious classes are easy to pick up and use</p>
+        <p><strong>Readable.</strong> You know what components will look like just by reading the markup</p>
+        <div class='mt3 h6'>
+          <code class='blue'>img class="circle border"</code>
+          <div class='my1'>vs.</div>
+          <code class='blue'>img class="profile-pic"</code>
+        </div>
+      </section>
+
+      <section>
+        <h2>Reusable</h2>
+        <p><strong>Content classes are specific.</strong> They are necessarily scoped to the specific content element they describe</p>
+        <p><strong>Presentational classes are universal.</strong> They can be used wherever the visual need arises</p>
+      </section>
+
+      <section>
+        <h2>Dogma is dangerous</h2>
+        <p><strong>And unnecessary.</strong> Instead of theoretical dancing-angels-on-the-head-of-a-pin debates, let's experiment and continuously evaluate and update best practices based on our core principle: user-centered decision making</p>
+        <blockquote class='mt4'>
+          <p>All great truths begin as blasphemies.</p>
+          <footer>George Bernard Shaw</footer>
+        </blockquote>
+      </section>
+
+      <section>
+        <h2>Tip of the Hats</h2>
+        <p><a href="https://twitter.com/thisisdano">Dano Williams</a> and <a href="https://twitter.com/hursey013">Brian Hurst</a>, for their keen eyes and helping hands in making this presentation more effective and sound more gooder</p>
+        <p><a href="http://jxnblk.com/">Brent Jackson</a> and <a href="http://mrmrs.cc/">Adam Morse</a> (& many other awesome devs), for everything they've built (and written about) around Atomic CSS</p>
+        <p><a href="https://github.com/hakimel/reveal.js">Hakim El Hattab</a>, for making and open sourcing the super slick HTML presentation library I'm using here</p>
+      </section>
+
+      <section class='center tc'>
+        <img src="img/peace-emoji.gif" alt="thanks!" width='150' height='150'>
+      </section>
+    </div>
+
+    <div class='nav-controls sans-serif'>
+      <button class="btn btn-outline btn-icon px0 navigate-left">
+        <svg class="icon" data-icon="left" viewBox="0 0 32 32" fill="#000">
+          <path d="M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z"></path>
+        </svg>
+      </button>
+      <button class="btn btn-outline btn-icon px0 navigate-right">
+        <svg class="icon" data-icon="right" viewBox="0 0 32 32" fill="#000">
+          <path d="M12 1 L26 16 L12 31 L8 27 L18 16 L8 5 z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="lib/js/reveal.min.js"></script>
+  <script>
+  Reveal.initialize({
+    center: false,
+    controls: false,
+    history: true,
+    slideNumber: false,
+    transition: 'none',
+    width: 1200,
+
+    dependencies: [
+      {
+        src: 'plugin/notes/notes.js',
+        async: true
+      },
+      {
+        src: 'plugin/highlight/highlight.js',
+        async: true,
+        callback: function() { hljs.initHighlightingOnLoad(); }
+      }
+    ]
+  });
+  </script>
+</body>
+
+</html>
