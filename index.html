@@ -39,32 +39,24 @@
         </div>
       </section>
 
-      <!--
-      <section class='h-100' data-background-image="img/sv-clip-1.png">
-        <div class='absolute bottom-0 right-0 h6'>
-          <a class='white underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">photo credit</a>
-        </div>
-      </section>
-      -->
-
       <section>
         <img src="img/sv-clip-1.png">
-        <a class='h6 underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">photo credit</a>
+        <a class='h6 black underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">YouTube clip</a>
       </section>
 
       <section>
         <img src="img/sv-clip-2.png">
-        <a class='h6 underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">photo credit</a>
+        <a class='h6 black underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">YouTube clip</a>
       </section>
 
       <section>
         <img src="img/sv-clip-3.png">
-        <a class='h6 underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">photo credit</a>
+        <a class='h6 black underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">YouTube clip</a>
       </section>
 
       <section>
         <img src="img/sv-clip-4.png">
-        <a class='h6 underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">photo credit</a>
+        <a class='h6 black underline' href="https://youtu.be/ACmydtFDTGs" target="_blank">YouTube clip</a>
       </section>
 
       <section class='center'>
@@ -111,10 +103,10 @@
 
       <section>
         <h2>Neural networks primer</h2>
-        <div class='py2 center-align'>
+        <div class='py2 tc'>
           <img src='img/neuron.png'>
         </div>
-        <pre><code class="python" data-trim>
+        <pre><code class="python">
 def unit(input, weights, bias):
     return activation_function(np.dot(input, weights) + bias)
         </code></pre>
@@ -122,21 +114,21 @@ def unit(input, weights, bias):
 
       <section>
         <h2>Neural networks primer</h2>
-        <div class='py2 center-align'>
+        <div class='py2 tc'>
           <img src='img/output-to-input.png'>
         </div>
       </section>
 
       <section>
         <h2>Neural networks primer</h2>
-        <div class='py2 center-align'>
+        <div class='py2 tc'>
           <img class='sm-col-8' src='img/neural-network.png'>
         </div>
       </section>
 
       <section>
         <h2>Neural networks primer</h2>
-        <div class='py2 center-align'>
+        <div class='py2 tc'>
           <img class='sm-col-10' src='img/backprop-slope.png'>
         </div>
       </section>
@@ -198,71 +190,71 @@ def unit(input, weights, bias):
 
       <section>
         <h2>Keras</h2>
-        <p>aka ConvNets aka CNNs</p>
-        <p>A powerful hammer for computer vision nails</p>
-        <p>Very similar to ordinary neural nets but with an architecture better suited to process and scale for image inputs</p>
-      </section>
-
-      <section class='center'>
-        <h2 class='m0 h1 tc'>Benefits</h2>
-      </section>
-
-      <section>
-        <h2>Naming things is hard</h2>
-        <p>(and now unnecessary!)</p>
-        <p>Atomic calls ’em like it sees ’em</p>
-        <div class='mt4'>
-          <div><code class='blue'>.bg-red</code> = <span class='bold'>b</span>ack<span class='bold'>g</span>round <span class='bold'>red</span></div>
-          <div><code class='blue'>.m2</code> = <span class='bold'>m</span>argin of <span class='bold'>2</span> spacing units</div>
-          <div><code class='blue'>.bold</code> = any guesses? 😏</div>
+        <div class='sm-col-9'>
+          <p>A high-level neural network library, written in Python</p>
+          <p>wraps an API similar to <code class='italic'>scikit-learn</code> around the Theano or TensorFlow backend.</p>
+          <p>Modular and user friendly -- easy to construct new models or leverage pretrained ones</p>
         </div>
       </section>
 
       <section>
-        <h2>Straightforward</h2>
-        <p><strong>Obvious.</strong> Simple, obvious classes are easy to pick up and use</p>
-        <p><strong>Readable.</strong> You know what components will look like just by reading the markup</p>
-        <div class='mt3 h6'>
-          <code class='blue'>img class="circle border"</code>
-          <div class='my1'>vs.</div>
-          <code class='blue'>img class="profile-pic"</code>
+        <h2>Pretrained CNN</h2>
+        <div class='sm-col-9'>
+          <p><strong>VGG16</strong> -- a 16 layer ConvNet trained on ImageNet data, ~140M parameters, runner-up in 2014</p>
+          <pre><code class="python">
+  model = keras.applications.VGG16(weights='imagenet', include_top=True)
+
+  model.summary()
+
+  ...
+          </code></pre>
+          <div class='bold'>TODO: add output predictions...</div>
         </div>
       </section>
 
       <section>
-        <h2>Reusable</h2>
-        <p><strong>Content classes are specific.</strong> They are necessarily scoped to the specific content element they describe</p>
-        <p><strong>Presentational classes are universal.</strong> They can be used wherever the visual need arises</p>
+        <h2>Transfer learning</h2>
+        <div class='sm-col-9'>
+          <p>In general, this refers to the process of leveraging the knowledge learned in one model for the training of another model.</p>
+          <p>More specifically, we'll load a state-of-the-art model (VGG16), chop off the last classifier layer, use the rest of the ConvNet as a fixed feature extractor for our new dataset, then train a linear classifier for the classes in our data.</p>
+        </div>
       </section>
 
       <section>
-        <h2>Dogma is dangerous</h2>
-        <p><strong>And unnecessary.</strong> Instead of theoretical dancing-angels-on-the-head-of-a-pin debates, let's experiment and continuously evaluate and update best practices based on our core principle: user-centered decision making</p>
+        <h2>Code walkthrough</h2>
+        <p class='bold'>TODO...</p>
+      </section>
+
+      <section>
+        <h2>Additional resources</h2>
+        <p>Stanford’s Convolutional Neural Networks for Visual Recognition <a href="http://cs231n.github.io/">course notes</a></p>
+        <p><a href="http://course.fast.ai/">Practical Deep Learning For Coders</a> (by fast.ai)</p>
+        <p>Kera’s <a href="https://blog.keras.io/">blog</a>, specifically <a href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">this post</a></p>
+      </section>
+
+      <section>
+        <h2>One day or day one...</h2>
+        <p>#1 suggestion (if I may) -- get your hands dirty with a toy project and fill in the gaps in your knowledge along the way.</p>
         <blockquote class='mt4'>
-          <p>All great truths begin as blasphemies.</p>
-          <footer>George Bernard Shaw</footer>
+          <p>The secret of getting ahead is getting started.</p>
+          <footer>Mark Twain</footer>
         </blockquote>
       </section>
 
-      <section>
-        <h2>Tip of the Hats</h2>
-        <p><a href="https://twitter.com/thisisdano">Dano Williams</a> and <a href="https://twitter.com/hursey013">Brian Hurst</a>, for their keen eyes and helping hands in making this presentation more effective and sound more gooder</p>
-        <p><a href="http://jxnblk.com/">Brent Jackson</a> and <a href="http://mrmrs.cc/">Adam Morse</a> (& many other awesome devs), for everything they've built (and written about) around Atomic CSS</p>
-        <p><a href="https://github.com/hakimel/reveal.js">Hakim El Hattab</a>, for making and open sourcing the super slick HTML presentation library I'm using here</p>
-      </section>
-
-      <section class='center tc'>
+      <section class='center'>
+        <h2>Thanks!</h2>
+        <p class='py2'>Code / Slides / Me</p>
         <img src="img/peace-emoji.gif" alt="thanks!" width='150' height='150'>
       </section>
     </div>
 
     <div class='nav-controls sans-serif'>
-      <button class="btn btn-outline btn-icon px0 navigate-left">
+      <button class="btn btn-icon p0 navigate-left">
         <svg class="icon" data-icon="left" viewBox="0 0 32 32" fill="#000">
           <path d="M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z"></path>
         </svg>
       </button>
-      <button class="btn btn-outline btn-icon px0 navigate-right">
+      <button class="btn btn-icon p0 navigate-right">
         <svg class="icon" data-icon="right" viewBox="0 0 32 32" fill="#000">
           <path d="M12 1 L26 16 L12 31 L8 27 L18 16 L8 5 z"></path>
         </svg>

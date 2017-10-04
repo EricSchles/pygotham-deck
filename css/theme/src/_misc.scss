@@ -2,34 +2,6 @@
   font-size: $h0;
 }
 
-.card-img {
-  position: relative;
-  height: 120px;
-  line-height: 120px;
-  text-align: center;
-}
-
-.card-img img {
-  bottom: 0;
-  height: auto;
-  left: 0;
-  margin: auto;
-  max-height: 75%;
-  max-width: 75%;
-  padding: 10px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: auto;
-}
-
-.logo-18f {
-  position: fixed;
-  bottom: 1.25rem;
-  left: 1rem;
-  z-index: 11;
-}
-
 .nav-controls {
   position: fixed;
   bottom: 1.25rem;
@@ -39,14 +11,14 @@
 }
 
 .btn-icon {
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   vertical-align: baseline;
 }
 
 .icon {
-  width: 1rem;
-  height: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
   vertical-align: top;
 }
 
