@@ -2,11 +2,11 @@ slides for **build your own “not hotdog” deep learning model**, pygotham 201
 
 ---
 
-this HTML deck is a fork of reveal.js (https://github.com/hakimel/reveal.js/) 
-
----
-
 local development:
 
 $ npm install
 $ npm start
+
+---
+
+HTML deck framework: reveal.js (https://github.com/hakimel/reveal.js/)

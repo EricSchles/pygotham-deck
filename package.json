@@ -1,6 +1,6 @@
 {
-  "name": "deck-not-hotdog",
-  "description": "(forked from http://lab.hakim.se/reveal-js)",
+  "name": "pygotham-deck",
+  "description": "2017, Build your own not hotdog deep learning model",
   "version": "0.0.1",
   "private": true,
   "scripts": {
