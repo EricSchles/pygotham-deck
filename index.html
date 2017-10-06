@@ -245,17 +245,14 @@ for p in decode_predictions(predictions)[0]:
       <section>
         <h2>Transfer learning</h2>
         <pre><code class="python" style="font-size:.8em" data-trim>
-# VGG’s input layer
-inp = vgg.input
-
 # new softmax layer with number of classes in our dataset
 new_classification_layer = Dense(num_classes, activation="softmax")
 
 # connect new layer to the second to last layer in VGG, and make ref to it
 out = new_classification_layer(vgg.layers[-2].output)
 
-# create new network between inp and out
-model_new = Model(inp, out)
+# create new network between VGG’s input layer and (new) output
+model_new = Model(vgg.input, out)
 
 # make all layers (except last) untrainable by freezing weights
 for layer in model_new.layers[:-1]:
